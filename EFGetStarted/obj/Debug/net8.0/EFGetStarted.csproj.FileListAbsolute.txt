@@ -1,0 +1,14 @@
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\EFGetStarted\bin\Debug\net8.0\EFGetStarted.exe
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\EFGetStarted\bin\Debug\net8.0\EFGetStarted.deps.json
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\EFGetStarted\bin\Debug\net8.0\EFGetStarted.runtimeconfig.json
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\EFGetStarted\bin\Debug\net8.0\EFGetStarted.dll
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\EFGetStarted\bin\Debug\net8.0\EFGetStarted.pdb
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\EFGetStarted\obj\Debug\net8.0\EFGetStarted.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\EFGetStarted\obj\Debug\net8.0\EFGetStarted.AssemblyInfoInputs.cache
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\EFGetStarted\obj\Debug\net8.0\EFGetStarted.AssemblyInfo.cs
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\EFGetStarted\obj\Debug\net8.0\EFGetStarted.csproj.CoreCompileInputs.cache
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\EFGetStarted\obj\Debug\net8.0\EFGetStarted.dll
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\EFGetStarted\obj\Debug\net8.0\refint\EFGetStarted.dll
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\EFGetStarted\obj\Debug\net8.0\EFGetStarted.pdb
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\EFGetStarted\obj\Debug\net8.0\EFGetStarted.genruntimeconfig.cache
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\EFGetStarted\obj\Debug\net8.0\ref\EFGetStarted.dll

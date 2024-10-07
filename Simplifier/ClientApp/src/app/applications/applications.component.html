@@ -1,0 +1,25 @@
+<h1 class="text-3xl font-bold">Applications</h1>
+<div class="flex">
+    <!-- Left Sidebar -->
+    <div class="w-64">
+        <ul class="">
+            <li *ngFor="let application of applications" class="cursor-pointer py-2 text-lg flex justify-between hover:bg-gray-200/20 border-b border-gray-200">
+                <a [attr.href]="'/applications/' + application.id" class="w-full text-left flex justify-between">
+                    <span class="font-medium">{{ application.name }}</span>
+                    <span class="text-sm text-gray-500/80">ID: {{ application.id }}</span>
+                </a>
+            </li>
+        </ul>
+        <li class="mt-4">
+            <button (click)="addNewApplication()" class="w-full bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700">
+                Add New Application
+            </button>
+        </li>
+    </div>
+
+
+    <!-- Main Content Area -->
+    <div class="flex-grow p-4">
+        <!-- Your main content goes here -->
+    </div>
+</div>

@@ -1,0 +1,14 @@
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\Simplifier.Entities\bin\Debug\net8.0\Simplifier.Entities.deps.json
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\Simplifier.Entities\bin\Debug\net8.0\Simplifier.Entities.runtimeconfig.json
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\Simplifier.Entities\bin\Debug\net8.0\Simplifier.Entities.dll
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\Simplifier.Entities\bin\Debug\net8.0\Simplifier.Entities.pdb
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\Simplifier.Entities\obj\Debug\net8.0\Simplifier.Entities.csproj.AssemblyReference.cache
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\Simplifier.Entities\obj\Debug\net8.0\Simplifier.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\Simplifier.Entities\obj\Debug\net8.0\Simplifier.Entities.AssemblyInfoInputs.cache
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\Simplifier.Entities\obj\Debug\net8.0\Simplifier.Entities.AssemblyInfo.cs
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\Simplifier.Entities\obj\Debug\net8.0\Simplifier.Entities.csproj.CoreCompileInputs.cache
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\Simplifier.Entities\obj\Debug\net8.0\Simplifier.Entities.dll
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\Simplifier.Entities\obj\Debug\net8.0\refint\Simplifier.Entities.dll
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\Simplifier.Entities\obj\Debug\net8.0\Simplifier.Entities.pdb
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\Simplifier.Entities\obj\Debug\net8.0\Simplifier.Entities.genruntimeconfig.cache
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\Simplifier.Entities\obj\Debug\net8.0\ref\Simplifier.Entities.dll

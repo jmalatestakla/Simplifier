@@ -1,0 +1,18 @@
+<header>
+  <nav class="bg-white shadow-md mb-10">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center h-16">
+        <a class="text-xl font-bold text-gray-800 cursor-pointer" [routerLink]="['/']">Fubank</a>
+        <div class="flex items-center space-x-4">
+          <a class="text-gray-800 hover:text-gray-600 cursor-pointer" [routerLink]="['/applications']" routerLinkActive="font-semibold">Applications</a>
+          <a class="text-gray-800 hover:text-gray-600 cursor-pointer" [routerLink]="['/templates']" routerLinkActive="font-semibold">Templates</a>
+          <a [routerLink]="['/users']" class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

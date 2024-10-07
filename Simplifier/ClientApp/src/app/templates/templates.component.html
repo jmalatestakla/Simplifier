@@ -1,0 +1,35 @@
+<h1 class="text-3xl font-bold">Add New Field</h1>
+
+<div class="mt-4">
+    <form [formGroup]="templateForm" (ngSubmit)="onSubmit()" class="space-y-4">
+        <div>
+            <label for="new-field" class="block text-sm font-medium text-gray-700">Field</label>
+            <input type="text" id="new-field" formControlName="fieldName" class="p-2 mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Enter field name">
+        </div>
+        <div>
+            <label for="new-expected-value" class="block text-sm font-medium text-gray-700">Expected Value</label>
+            <input type="text" id="new-expected-value" formControlName="expectedValue" class="p-2 mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Enter expected value">
+        </div>
+        <div *ngIf="formInvalid" class="text-red-600 text-sm">
+            Please fill out all form fields
+        </div>
+        <div>
+            <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Save
+            </button>
+        </div>
+    </form>
+    <div class="mt-8">
+        <h2 class="text-2xl font-bold">Current Template</h2>
+        <div *ngIf="template">
+            <div *ngFor="let field of template" class="mt-4 flex items-center gap-3">
+                <label class="block text-sm font-medium text-gray-700">{{ field.fieldName }}</label>
+                <p class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm sm:text-sm p-2">{{ field.expectedValue }}</p>
+            </div>
+        </div>
+        <div *ngIf="!template" class="mt-4 text-sm text-gray-500">
+            No template available.
+        </div>
+    </div>
+    
+</div>
