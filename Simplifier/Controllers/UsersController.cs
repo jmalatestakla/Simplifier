@@ -38,5 +38,41 @@ namespace Simplifier.Controllers
 
             return Ok(new { message = "successfully added new user" });
         }
+
+        [HttpDelete("{uuid}")]
+        public IActionResult Delete(Guid uuid)
+        {
+            _logger.LogInformation("deleting user with uuid {uuid}", uuid);
+            var user = _context.Users.FirstOrDefault(u => u.Uuid == uuid);
+            if (user == null)
+            {
+                _logger.LogWarning("user with uuid {uuid} not found", uuid);
+                return NotFound(new { message = "user not found" });
+            }
+
+            _context.Users.Remove(user);
+            _context.SaveChanges();
+            _logger.LogInformation("deleted user with uuid {uuid}", uuid);
+
+            return Ok(new { message = "successfully deleted user" });
+        }
+
+        [HttpPut]
+        public IActionResult Put([FromBody] User user)
+        {
+            _logger.LogInformation("updating user with uuid {uuid}", user.Uuid);
+            var existingUser = _context.Users.FirstOrDefault(u => u.Uuid == user.Uuid);
+            if (existingUser == null)
+            {
+                _logger.LogWarning("user with uuid {uuid} not found", user.Uuid);
+                return NotFound(new { message = "user not found" });
+            }
+
+            existingUser.Email = user.Email;
+            _context.SaveChanges();
+            _logger.LogInformation("updated user with uuid {uuid}", user.Uuid);
+
+            return Ok(new { message = "successfully updated user email" });
+        }
     }
 }

@@ -12,3 +12,4 @@ C:\Users\JoeMalatesta\RiderProjects\Simplifier\Simplifier.Entities\obj\Debug\net
 C:\Users\JoeMalatesta\RiderProjects\Simplifier\Simplifier.Entities\obj\Debug\net8.0\Simplifier.Entities.pdb
 C:\Users\JoeMalatesta\RiderProjects\Simplifier\Simplifier.Entities\obj\Debug\net8.0\Simplifier.Entities.genruntimeconfig.cache
 C:\Users\JoeMalatesta\RiderProjects\Simplifier\Simplifier.Entities\obj\Debug\net8.0\ref\Simplifier.Entities.dll
+C:\Users\JoeMalatesta\RiderProjects\Simplifier\Simplifier.Entities\obj\Debug\net8.0\Simplifier.Entities.sourcelink.json

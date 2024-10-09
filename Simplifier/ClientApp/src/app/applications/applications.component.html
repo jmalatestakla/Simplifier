@@ -10,16 +10,25 @@
                 </a>
             </li>
         </ul>
-        <li class="mt-4">
-            <button (click)="addNewApplication()" class="w-full bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700">
+            <button (click)="addNewApplication()" class="mt-2 w-full bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700">
                 Add New Application
             </button>
-        </li>
     </div>
 
 
     <!-- Main Content Area -->
     <div class="flex-grow p-4">
-        <!-- Your main content goes here -->
+        <h2 class="text-4xl mb-2">New Application</h2>
+        <form class="flex gap-1">
+            <textarea name="" id="" class="h-60 w-2/3 ring-black p-2 ring-2 ring-opacity-15 rounded-md"></textarea>
+            <div class="w-1/3">
+                <label for="response-type" class="block text-sm font-medium text-gray-700">Select Template</label>
+                <select id="response-type" formControlName="responseType" class="p-2 mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <option value="string">String</option>
+                    <option value="number">Number</option>
+                </select>
+            </div>
+        </form>
+
     </div>
 </div>

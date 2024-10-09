@@ -15,9 +15,9 @@ namespace Simplifier.Controllers
             new Application
             {
                 Uuid = Guid.NewGuid(),
-                UserId = Guid.NewGuid(),
-                Name = "Personal Loan",
-                RawText = "This is a personal loan application.",
+                UserId = Guid.Parse("74939c8b-654e-4e83-a3a2-0403c8afb4a3"),
+                Name = "Malatesta Family",
+                RawText = "This is a random blob of text from an email or text file.",
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
                 TemplateId = Guid.NewGuid(),
@@ -27,8 +27,8 @@ namespace Simplifier.Controllers
             {
                 Uuid = Guid.NewGuid(),
                 UserId = Guid.NewGuid(),
-                Name = "Business Loan",
-                RawText = "This is a business loan application.",
+                Name = "Johnson Family",
+                RawText = "Another random application from the johnson family...",
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
                 TemplateId = Guid.NewGuid(),
@@ -48,14 +48,6 @@ namespace Simplifier.Controllers
         [HttpGet]
         public IEnumerable<Application> Get()
         {
-            var user = new User
-            {
-                Uuid = Guid.NewGuid(),
-                Email = "joe@gmail.com"
-            };
-            _logger.LogInformation("adding user {user.Email}, {user.Uuid}", user.Email, user.Uuid);
-            var tableNames = _context.Users.Add(user);
-            _context.SaveChanges();    
             return Applications;
         }
 

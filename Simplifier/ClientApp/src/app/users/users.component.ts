@@ -6,6 +6,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 interface User {
   uuid: string;
   email: string;
+  isEditing?: boolean;
 }
 
 @Component({
@@ -18,6 +19,7 @@ export class UsersComponent implements OnInit {
   userForm = new FormGroup({
     email: new FormControl(''),
   });
+
   users: User[] = [];
   newUser: User | undefined;
 
@@ -45,6 +47,22 @@ export class UsersComponent implements OnInit {
     this.http.get<User[]>(this.baseUrl + 'api/users').subscribe(result => {
       this.users = result;
     }, error => console.error(error));
+  }
+
+  deleteUser(uuid: string) {
+    console.log('deleting user with uuid: ' + uuid);
+    this.http.delete<User>(this.baseUrl + `api/users/${uuid}`).subscribe(result => {
+      this.getUsers();
+    }, error => console.error(error));
+
+  }
+
+  async updateUser(user: User) {
+    console.log('updating user with uuid: ' + user.uuid);
+    this.http.put<User>(this.baseUrl + `api/users`, user, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).subscribe(result => {
+      this.getUsers();
+    }, error => console.error(error));
+    user.isEditing = false;
   }
 }
 
