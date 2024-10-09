@@ -39,3 +39,16 @@ IDK how food bank applications actually work, but for the sake of scope we are j
 ### CRUD
 - Allow applications and templates to be created, edited, and deleted
 - Read list of applications and t
+
+### Setup commands
+- Run angular
+  - cd Simplifier/ClientApp
+  - npm run start
+- Run .Net backend
+  - cd Simplifier
+  - dotnet run
+- Update DB Schema
+  - Change Schema in Models folder
+  - cd Simplifier.Entities
+  - dotnet ef migrations add YourMigrationName --startup-project ../Simplifier/Simplifier.csproj
+  - dotnet ef database update --startup-project ../Simplifier/Simplifier.csproj    

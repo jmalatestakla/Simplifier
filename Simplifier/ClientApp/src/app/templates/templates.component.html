@@ -40,7 +40,7 @@
         </div>
             <div *ngFor="let field of template" class="mt-2 flex items-center gap-3">
                 <p class="w-1/12 text-black/50">{{ field.fieldType == "text" ? "T" : "#" }}</p>
-                <label class="w-4/12 text-gray-700 text-2xl font-semibold">{{ field.fieldName }}</label>
+                <label class="w-4/12 text-gray-700 font-semibold">{{ field.fieldName }}</label>
                 <p class=" w-7/12 p-2">{{ field.expectedValue }}</p>
             </div>
         <button type="submit" (click)="saveTemplate()" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">

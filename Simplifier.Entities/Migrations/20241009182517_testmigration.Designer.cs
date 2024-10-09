@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Simplifier.Entities;
 
@@ -11,9 +12,11 @@ using Simplifier.Entities;
 namespace Simplifier.Entities.Migrations
 {
     [DbContext(typeof(SimplifierContext))]
-    partial class SimplifierContextModelSnapshot : ModelSnapshot
+    [Migration("20241009182517_testmigration")]
+    partial class testmigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
