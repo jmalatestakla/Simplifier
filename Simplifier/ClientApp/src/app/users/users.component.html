@@ -1,24 +1,24 @@
 <h1 class="text-3xl font-bold">Users</h1>
-<div class="flex justify-between">
+<div class="flex justify-between flex-col items-center">
     <!-- Left Sidebar -->
-    <div class="w-3/5">
-        <li *ngFor="let user of users" class="w-full py-2 gap-10 items-center text-lg flex justify-between hover:bg-gray-200/20 border-b border-gray-200">
+    <div class="w-full">
+        <li *ngFor="let user of users" class="p-2 w-full py-2 gap-10 items-center text-lg flex justify-between hover:bg-gray-200/20 border-b border-gray-200">
             <div class="flex items-center gap-2">
                 <p *ngIf="!user.isEditing" class="font-medium">{{ user.email }}</p>
                 <input *ngIf="user.isEditing" [(ngModel)]="user.email" class="font-medium border p-1" />
             </div>
             <p class="text-black/50 text-sm">{{ user.uuid }}</p>
             <div class="flex gap-2">
-                <button *ngIf="!user.isEditing" (click)="user.isEditing = true" class="text-blue-500 hover:text-blue-700">Edit</button>
-                <button *ngIf="user.isEditing" (click)="updateUser(user)" class="text-green-500 hover:text-green-700">Save</button>
-                <button (click)="deleteUser(user.uuid)" class="text-red-500 hover:text-red-700">Delete</button>
+                <button *ngIf="!user.isEditing" (click)="user.isEditing = true" class=""><img class="w-6 opacity-60 hover:opacity-100 transition-all" src="../../assets/edit.svg" alt=""></button>
+                <button *ngIf="user.isEditing" (click)="updateUser(user)" class=""><img class="w-6 opacity-60 hover:opacity-100 transition-all" src="../../assets/check.svg" alt=""></button>
+                <button (click)="deleteUser(user.uuid)" class=""><img class="w-6 opacity-60 hover:opacity-100 transition-all" src="../../assets/trash.svg" alt=""></button>
             </div>
         </li>
     </div>
     <!-- Add new user on right -->
-<div class="w-1/5">
+<div class="w-full">
     <h2 class="text-2xl font-bold mb-4">Add New User</h2>
-    <form [formGroup]="userForm" (ngSubmit)="addNewUser()">
+    <form [formGroup]="userForm" (ngSubmit)="addNewUser()" class="flex">
         <div class="mb-4">
             <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
             <input type="email" id="email" name="email" formControlName="email" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">

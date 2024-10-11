@@ -1,9 +1,49 @@
-<h1 class="text-3xl font-bold">Add New Field</h1>
+<div class="flex gap-10">
+    <!-- Left sidebar -->
+    <div class="w-80">
+        <h1 class="text-3xl font-bold">Templates</h1>
+        <div class="w-full flex flex-col mt-2">
+                <button (click)="selectTemplate(template)" *ngFor="let template of templates" class="p-2 rounded-md hover:bg-gray-100 cursor-pointer flex justify-between">
+                    <p class="text-lg">{{ template.name }}</p>
+                    <p class="text-black/60">{{ template.updatedAt | date:'dd/MM/yy' }}</p>
+                </button>
+                <button class="rounded bg-indigo-500 p-2 text-white hover:bg-inidgo-600" (click)="selectedTemplate = undefined">Create New</button>
+        </div>
+    </div>
 
-<div class="mt-4">
-    <form [formGroup]="templateForm" (ngSubmit)="onSubmit()" class="space-y-4">
-        <div class="flex w-full">
 
+
+    <!-- Right side. main content -->
+
+
+    <!-- VIEW OR EDIT EXISTING TEMPLATE THAT IS SELECTED OR MOST RECENT -->
+    <div *ngIf="selectedTemplate != undefined" class="w-2/3" >
+        <h2 class="text-3xl font-bold">{{selectedTemplate.name}}</h2>
+        <div class="w-full mt-2 flex items-center gap-3 text-sm opacity-80">
+            <p class="text-black/50 w-1/12">Type</p>
+            <label class="w-4/12 text-gray-700">Field</label>
+            <p class="w-7/12 p-2">Example outcome</p>
+        </div>
+            <div *ngFor="let field of selectedTemplateItems" class="mt-2 flex items-center gap-3">
+                <p class="w-1/12 text-black/50">{{ field.fieldType == "text" ? "T" : "#" }}</p>
+                <label class="w-4/12 text-gray-700 font-semibold">{{ field.fieldName }}</label>
+                <p class=" w-7/12 p-2">{{ field.expectedValue }}</p>
+            </div>
+        <button type="submit" (click)="updateTemplate()" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Update Template
+            </button>
+    </div>
+
+
+    <!-- NEW TEMPLATE CREATOR IF THERE ARE NONE OR IF "ADD" IS SELECTED -->
+    <div *ngIf="selectedTemplate == undefined" class="w-2/3">
+
+        <h1 class="text-3xl font-bold">New Template</h1>
+        <form [formGroup]="templateForm" (ngSubmit)="addNewItem()" class="space-y-4 mt-2">
+            <div class="flex items-center">
+                <input type="text" formControlName="name" class="border-b bordeer-black/30 text-2xl mt-1 block w-1/2 focus:outline-none focus:placeholder:opacity-0 placeholder:transition-all" placeholder="template name">
+            </div>
+            <div class="flex w-full">
             <div class="w-2/3">
                 <label for="new-field" class="block text-sm font-medium text-gray-700">Field</label>
                 <input type="text" id="new-field" formControlName="fieldName" class="p-2 mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Enter field name">
@@ -31,14 +71,14 @@
             </button>
         </div>
     </form>
-    <div *ngIf="template.length >= 1" class="mt-8 w-full" >
+    <div *ngIf="templateItems.length >= 1" class="mt-8 w-full" >
         <h2 class="text-2xl font-bold">Current Template</h2>
         <div class="w-full mt-4 flex items-center gap-3 text-sm opacity-80">
             <p class="text-black/50 w-1/12">Type</p>
             <label class="w-4/12 text-gray-700">Field</label>
             <p class="w-7/12 p-2">Example outcome</p>
         </div>
-            <div *ngFor="let field of template" class="mt-2 flex items-center gap-3">
+            <div *ngFor="let field of templateItems" class="mt-2 flex items-center gap-3">
                 <p class="w-1/12 text-black/50">{{ field.fieldType == "text" ? "T" : "#" }}</p>
                 <label class="w-4/12 text-gray-700 font-semibold">{{ field.fieldName }}</label>
                 <p class=" w-7/12 p-2">{{ field.expectedValue }}</p>
@@ -48,4 +88,5 @@
             </button>
     </div>
     
+</div>
 </div>
