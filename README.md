@@ -52,3 +52,15 @@ IDK how food bank applications actually work, but for the sake of scope we are j
   - cd Simplifier.Entities
   - dotnet ef migrations add YourMigrationName --startup-project ../Simplifier/Simplifier.csproj
   - dotnet ef database update --startup-project ../Simplifier/Simplifier.csproj    
+
+
+# What I got through
+- Full CRUD operations for User
+- Create and read for templates
+
+# With some more time
+- Actually getting AI portion to work.
+- Finish rest of crud apps
+
+# Difficulties
+- EF Setup and Migrations

@@ -20,5 +20,8 @@
         public DbSet<User> Users { get; set; }
         public DbSet<Application> Applications { get; set; }
         public DbSet<Template> Templates { get; set; }
+        public DbSet<FormFields> FormFields { get; set; }
+        public DbSet<FormResponses> FormResponses { get; set; }
+
     }
 }

@@ -21,7 +21,6 @@ namespace Simplifier.Controllers
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
                 TemplateId = Guid.NewGuid(),
-                FormResponses = "{\"question1\":\"answer1\",\"question2\":\"answer2\"}",
             },
             new Application
             {
@@ -32,7 +31,6 @@ namespace Simplifier.Controllers
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
                 TemplateId = Guid.NewGuid(),
-                FormResponses = "{\"question1\":\"answer1\",\"question2\":\"answer2\"}",
             }
         };
         private readonly ILogger<ApplicationsController> _logger;
@@ -52,24 +50,13 @@ namespace Simplifier.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] string randomString)
+        public IActionResult Post([FromBody] Application application)
         {
-            _logger.LogInformation("hitting this {randomString} ", randomString);
-            // var newApplication = new Application
-            // {
-            //     Uuid = Guid.NewGuid(),
-            //     UserId = Guid.NewGuid(),
-            //     Name = "Personal Loan",
-            //     RawText = "This is a personal loan application.",
-            //     CreatedAt = DateTime.UtcNow,
-            //     UpdatedAt = DateTime.UtcNow,
-            //     TemplateId = Guid.NewGuid(),
-            //     FormResponses = "{\"question1\":\"answer1\",\"question2\":\"answer2\"}",
-            // };
+            _context.Applications.Add(application);
+            _context.SaveChanges();
 
-            // _context.Applications.Add(newApplication);
-            // _context.SaveChanges();
-
-            return Ok(new { message = randomString });}
+            return Ok(new { message = "success" });}
     }
+
+
 }

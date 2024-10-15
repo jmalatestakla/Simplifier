@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Simplifier.Entities;
 
@@ -11,9 +12,11 @@ using Simplifier.Entities;
 namespace Simplifier.Entities.Migrations
 {
     [DbContext(typeof(SimplifierContext))]
-    partial class SimplifierContextModelSnapshot : ModelSnapshot
+    [Migration("20241014214318_formtype")]
+    partial class formtype
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -162,11 +165,13 @@ namespace Simplifier.Entities.Migrations
 
             modelBuilder.Entity("Simplifier.Entities.FormFields", b =>
                 {
-                    b.HasOne("Simplifier.Entities.Template", null)
+                    b.HasOne("Simplifier.Entities.Template", "Template")
                         .WithMany("FormFields")
                         .HasForeignKey("TemplateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Template");
                 });
 
             modelBuilder.Entity("Simplifier.Entities.FormResponses", b =>

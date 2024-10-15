@@ -10,8 +10,8 @@ namespace Simplifier.Entities
         public Guid Uuid { get; set; } // PK
         public Guid UserId { get; set; } // FK
         public string Name { get; set; } 
-        public string FormFields { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public ICollection<FormFields> FormFields { get; set; }
     }
 }

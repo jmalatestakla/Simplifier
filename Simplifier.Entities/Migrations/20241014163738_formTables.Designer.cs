@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Simplifier.Entities;
 
@@ -11,9 +12,11 @@ using Simplifier.Entities;
 namespace Simplifier.Entities.Migrations
 {
     [DbContext(typeof(SimplifierContext))]
-    partial class SimplifierContextModelSnapshot : ModelSnapshot
+    [Migration("20241014163738_formTables")]
+    partial class formTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,6 +33,10 @@ namespace Simplifier.Entities.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("FormResponses")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -55,61 +62,6 @@ namespace Simplifier.Entities.Migrations
                     b.ToTable("Applications");
                 });
 
-            modelBuilder.Entity("Simplifier.Entities.FormFields", b =>
-                {
-                    b.Property<Guid>("Uuid")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ExpectedResponse")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FormField")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FormType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Order")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("TemplateId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Uuid");
-
-                    b.HasIndex("TemplateId");
-
-                    b.ToTable("FormFields");
-                });
-
-            modelBuilder.Entity("Simplifier.Entities.FormResponses", b =>
-                {
-                    b.Property<Guid>("Uuid")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ApplicationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("FormField")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Response")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Uuid");
-
-                    b.HasIndex("ApplicationId");
-
-                    b.ToTable("FormResponses");
-                });
-
             modelBuilder.Entity("Simplifier.Entities.Template", b =>
                 {
                     b.Property<Guid>("Uuid")
@@ -118,6 +70,10 @@ namespace Simplifier.Entities.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("FormFields")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -158,36 +114,6 @@ namespace Simplifier.Entities.Migrations
                         .IsRequired();
 
                     b.Navigation("Template");
-                });
-
-            modelBuilder.Entity("Simplifier.Entities.FormFields", b =>
-                {
-                    b.HasOne("Simplifier.Entities.Template", null)
-                        .WithMany("FormFields")
-                        .HasForeignKey("TemplateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Simplifier.Entities.FormResponses", b =>
-                {
-                    b.HasOne("Simplifier.Entities.Application", "Application")
-                        .WithMany("FormResponses")
-                        .HasForeignKey("ApplicationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Application");
-                });
-
-            modelBuilder.Entity("Simplifier.Entities.Application", b =>
-                {
-                    b.Navigation("FormResponses");
-                });
-
-            modelBuilder.Entity("Simplifier.Entities.Template", b =>
-                {
-                    b.Navigation("FormFields");
                 });
 #pragma warning restore 612, 618
         }

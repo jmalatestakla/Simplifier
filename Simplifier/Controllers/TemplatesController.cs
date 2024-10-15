@@ -25,17 +25,25 @@ namespace Simplifier.Controllers
         public IEnumerable<Template> Get()
         {
             _logger.LogInformation("getting templates");
-            var templates = _context.Templates.ToList();
-            _logger.LogInformation("got templates {templates}", templates);
+            var templates = _context.Templates.Include(t => t.FormFields).ToList();
+            _logger.LogInformation("templates {templates}", templates);
             return templates;
         }
 
         [HttpPost]
         public IActionResult Post([FromBody] Template template)
-        {
+        {   
+            _logger.LogInformation("Adding template {template}", template);
             _context.Templates.Add(template);
+            foreach (var field in template.FormFields)
+            {
+            _logger.LogInformation("Adding field {field}", field);
+            field.TemplateId = template.Uuid;
+            _context.FormFields.Add(field);
+            }
             _context.SaveChanges();
 
-            return Ok(new { message = "success" });}
+            return Ok(new { message = "success" });
+        }
     }
 }

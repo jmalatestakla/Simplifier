@@ -10,41 +10,48 @@ import {
 import { Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 interface TemplateItem {
-  fieldName: string | null;
-  fieldType: string | null;
-  expectedValue: string | null;
+  fieldName: string;
+  fieldType: string;
+  expectedValue: string;
+  order: number;
 }
 
 interface Template {
   uuid: string;
   userId: string;
   name: string;
-  formFields: string;
   createdAt: Date;
   updatedAt: Date;
+  formFields: formField[];
+}
+interface formField {
+  uuid: string;
+  templateId: string;
+  formField: string;
+  formType: string;
+  expectedResponse: string;
+  order: number;
 }
 
 @Component({
   selector: 'app-templates-component',
   templateUrl: './templates.component.html',
-  imports: [ReactiveFormsModule, CommonModule],
-  standalone: true,
 })
 export class TemplatesComponent {
   templates: Template[] = [];
   selectedTemplate: Template | undefined;
-  selectedTemplateItems: TemplateItem[] = [];
+  selectedTemplateItems: formField[] = [];
   templateName: string = '';
   templateItems: TemplateItem[] = [];
   formInvalid: boolean = false;
   newTemplateName: string = '';
+  formFields: formField[] = [];
   templateForm = this.fb.group({
     name: ['', Validators.required],
     fieldName: ['', Validators.required],
     fieldType: ['', Validators.required],
     expectedValue: ['', Validators.required],
   });
-JSON: any;
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
@@ -62,14 +69,13 @@ JSON: any;
     // Add new form field on frontend
     console.log('submitted form');
     this.templateItems.length === 0
-    this.templateItems.push(this.templateForm.value as TemplateItem);
-    console.log(this.templateItems.length);
+    const order = this.templateItems.length + 1;
+    this.templateItems.push({...this.templateForm.value, order} as TemplateItem);
   }
 
   selectTemplate(template: Template) {
     this.selectedTemplate = template;
-    console.log(template.formFields);
-    this.selectedTemplateItems = JSON.parse(template.formFields) as TemplateItem[];
+    console.log(this.selectedTemplate.formFields);
   }
 
   async ngOnInit() {
@@ -80,8 +86,7 @@ JSON: any;
           new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
       );
       this.selectedTemplate = this.templates[0];
-      this.selectedTemplateItems = JSON.parse(this.templates[0].formFields) as TemplateItem[];
-    }
+    } 
   }
 
   async getTemplates() {
@@ -89,34 +94,43 @@ JSON: any;
       (await this.http
         .get<Template[]>(this.baseUrl + 'api/templates')
         .toPromise()) || [];
+        console.log(this.templates);
   }
 
   // Save entire form on backend.
   saveTemplate() {
     console.log('saving template');
-    console.log(this.newTemplateName);
-    let template: Template = {
-      uuid: crypto.randomUUID(),
-      userId: 'b1cd0b7c-210a-4170-85f2-009c11fe3baa',
-      name: this.templateForm.value.name || 'undefined',
-      formFields: JSON.stringify(this.templateItems),
-      createdAt: new Date(),
-      updatedAt: new Date(),
+    console.log(this.templateItems);
+    let templateId: string = crypto.randomUUID()
+    let template = {
+      Uuid: templateId, // Uuid with uppercase
+      UserId: 'b1cd0b7c-210a-4170-85f2-009c11fe3baa',
+      Name: this.templateForm.value.name || 'undefined',
+      FormFields: this.templateItems.map(item => ({
+        Uuid: crypto.randomUUID(), // Uuid with uppercase
+        FormField: item.fieldName,
+        FormType: item.fieldType,
+        ExpectedResponse: item.expectedValue,
+        Order: item.order,
+        TemplateId: templateId // TemplateId with uppercase
+      })),
+      CreatedAt: new Date(),
+      UpdatedAt: new Date(),
     };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     this.http
       .post<Template>(
-        this.baseUrl + 'api/templates',
-        JSON.stringify(template),
-        { headers }
+      this.baseUrl + 'api/templates',
+      JSON.stringify(template),
+      { headers }
       )
       .subscribe(
-        (result) => {
-          this.templates.push(result);
-          this.getTemplates();
-          this.templateForm.reset();
-        },
-        (error) => console.error(error)
+      (result) => {
+        this.templates.push(result);
+        this.getTemplates();
+        this.templateForm.reset();
+      },
+      (error) => console.error(error)
       );
 
       // reset things
@@ -125,30 +139,30 @@ JSON: any;
       this.templateName = '';
   }
 
-  updateTemplate() {
-    console.log('saving template');
-    let template: Template = {
-      uuid: crypto.randomUUID(),
-      userId: 'b1cd0b7c-210a-4170-85f2-009c11fe3baa',
-      name: 'test',
-      formFields: JSON.stringify(this.templateItems),
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    this.http
-      .put<Template>(
-        this.baseUrl + 'api/templates',
-        JSON.stringify(template),
-        { headers }
-      )
-      .subscribe(
-        (result) => {
-          this.templates.push(result);
-          this.getTemplates();
-          this.templateForm.reset();
-        },
-        (error) => console.error(error)
-      );
-  }
+  // updateTemplate() {
+  //   console.log('saving template');
+  //   let template: Template = {
+  //     uuid: crypto.randomUUID(),
+  //     userId: 'b1cd0b7c-210a-4170-85f2-009c11fe3baa',
+  //     name: 'test',
+  //     formFields: JSON.stringify(this.templateItems),
+  //     createdAt: new Date(),
+  //     updatedAt: new Date(),
+  //   };
+  //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  //   this.http
+  //     .put<Template>(
+  //       this.baseUrl + 'api/templates',
+  //       JSON.stringify(template),
+  //       { headers }
+  //     )
+  //     .subscribe(
+  //       (result) => {
+  //         this.templates.push(result);
+  //         this.getTemplates();
+  //         this.templateForm.reset();
+  //       },
+  //       (error) => console.error(error)
+  //     );
+  // }
 }

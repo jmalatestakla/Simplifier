@@ -16,6 +16,7 @@ import { UsersComponent} from './users/users.component'
     AppComponent,
     NavMenuComponent,
     HomeComponent,
+    TemplatesComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
