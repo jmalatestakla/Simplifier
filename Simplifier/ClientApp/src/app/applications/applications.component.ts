@@ -50,6 +50,7 @@ export class ApplicationsComponent implements OnInit {
   templates: any[] = [];
   selectedApplication: Application | undefined;
   responses: FormResponse[] = [];
+  toggleRawText: boolean = false;
 
   applicationForm = this.fb.group({
     name: ['', Validators.required],
