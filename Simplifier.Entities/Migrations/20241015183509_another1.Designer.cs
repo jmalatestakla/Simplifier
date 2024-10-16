@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Simplifier.Entities;
 
@@ -11,9 +12,11 @@ using Simplifier.Entities;
 namespace Simplifier.Entities.Migrations
 {
     [DbContext(typeof(SimplifierContext))]
-    partial class SimplifierContextModelSnapshot : ModelSnapshot
+    [Migration("20241015183509_another1")]
+    partial class another1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,6 +52,8 @@ namespace Simplifier.Entities.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Uuid");
+
+                    b.HasIndex("TemplateId");
 
                     b.ToTable("Applications");
                 });
@@ -145,6 +150,17 @@ namespace Simplifier.Entities.Migrations
                     b.HasKey("Uuid");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Simplifier.Entities.Application", b =>
+                {
+                    b.HasOne("Simplifier.Entities.Template", "Template")
+                        .WithMany()
+                        .HasForeignKey("TemplateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Template");
                 });
 
             modelBuilder.Entity("Simplifier.Entities.FormFields", b =>

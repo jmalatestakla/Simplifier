@@ -10,6 +10,5 @@ namespace Simplifier.Entities
         public Guid ApplicationId { get; set; } // FK
         public string FormField { get; set; }
         public string Response { get; set; }
-        public Application Application { get; set; }
     }
 }

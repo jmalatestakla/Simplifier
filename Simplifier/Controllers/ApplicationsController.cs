@@ -45,8 +45,15 @@ namespace Simplifier.Controllers
 
         [HttpGet]
         public IEnumerable<Application> Get()
-        {
-            return Applications;
+        {   
+            var applicationsWithResponses = _context.Applications
+                .Include(a => a.FormResponses)
+                .ToList();
+            foreach (var app in applicationsWithResponses)
+            {
+                _logger.LogInformation($"Application: {app.Name}, UserId: {app.UserId}, CreatedAt: {app.CreatedAt}");
+            }
+            return applicationsWithResponses;
         }
 
         [HttpPost]

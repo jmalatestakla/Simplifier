@@ -13,7 +13,7 @@ namespace Simplifier.Entities
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public Guid TemplateId { get; set; } // FK
-        public Template Template { get; set; }
-        public ICollection<FormResponses> FormResponses { get; set; }
+        public virtual Template? Template { get; set; }
+        public ICollection<FormResponses> FormResponses { get; set; }   
     }
 }

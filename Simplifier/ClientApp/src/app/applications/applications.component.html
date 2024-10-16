@@ -34,12 +34,12 @@
                 <div class="w-1/3">
                                 <label for="response-type" class="block text-sm font-medium text-gray-700">Select Template</label>
                                 <select id="response-type" formControlName="templateId" class="p-2 mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                    <option *ngFor="let template of templates" value={{template.uuid}} >{{template.name}}</option>
-                                </select>
+                                    <option *ngFor="let template of templates" [value]="template.uuid">{{template.name}}</option>
+                                  </select>
                             </div>
             </div>
             <textarea name="" formControlName="rawText" id="" class="h-60 w-full ring-black p-2 ring-2 ring-opacity-15 rounded-md"></textarea>
-            <button type="submit" class=" bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700">
+            <button (click)="addNewApplication()" type="submit" class=" bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700">
                 Submit
             </button>
         </form>
