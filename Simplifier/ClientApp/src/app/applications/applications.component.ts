@@ -49,6 +49,7 @@ export class ApplicationsComponent implements OnInit {
   newApplication: Application | undefined;
   templates: any[] = [];
   selectedApplication: Application | undefined;
+  selectedApplicationTemplateName: string = '';
   responses: FormResponse[] = [];
   toggleRawText: boolean = false;
 
@@ -72,7 +73,6 @@ export class ApplicationsComponent implements OnInit {
     (await this.http
       .get<Template[]>(this.baseUrl + 'api/templates')
       .toPromise()) || [];
-      console.log(this.applications);
   }
 
   async ngOnInit() {
@@ -83,6 +83,13 @@ export class ApplicationsComponent implements OnInit {
           new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
       );
     } 
+  }
+
+  selectApplication(application: Application | undefined) {
+    this.selectedApplication = application;
+    console.log(this.templates);
+    this.selectedApplicationTemplateName = this.templates.find(template => template.uuid === application?.templateId)?.name || '';
+    this.toggleRawText = false;
   }
 
   addNewApplication() {
@@ -115,7 +122,6 @@ export class ApplicationsComponent implements OnInit {
       templateId: this.applicationForm.value.templateId!, // Replace with actual logic to generate a unique Template ID
       formResponses: this.responses,
     };
-    console.log(this.newApplication);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     this.http
       .post<Application>(
@@ -125,7 +131,28 @@ export class ApplicationsComponent implements OnInit {
       )
       .subscribe(
         (result) => {
-          this.applications.push(result);
+        },
+        (error) => console.error(error)
+      );
+    this.applications.push(this.newApplication);
+    this.applicationForm.reset();
+  }
+
+
+  deleteApplication() {
+    if (!this.selectedApplication) {
+      console.log('No application selected');
+      return;
+    }
+
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    this.http
+      .delete(this.baseUrl + `api/applications/${this.selectedApplication.uuid}`, { headers })
+      .subscribe(
+        () => {
+          this.applications = this.applications.filter(app => app.uuid !== this.selectedApplication!.uuid);
+          this.selectedApplication = undefined;
+          console.log('Application deleted successfully');
         },
         (error) => console.error(error)
       );

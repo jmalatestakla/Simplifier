@@ -45,7 +45,7 @@ namespace Simplifier.Controllers
 
         [HttpGet]
         public IEnumerable<Application> Get()
-        {   
+        {
             var applicationsWithResponses = _context.Applications
                 .Include(a => a.FormResponses)
                 .ToList();
@@ -62,8 +62,34 @@ namespace Simplifier.Controllers
             _context.Applications.Add(application);
             _context.SaveChanges();
 
-            return Ok(new { message = "success" });}
+            return Ok(new { message = "success" });
+        }
+
+
+        [HttpDelete("{uuid}")]
+        public IActionResult Delete(Guid uuid)
+        {
+            _logger.LogInformation("Deleting application with uuid {uuid}", uuid);
+            var application = _context.Applications.FirstOrDefault(a => a.Uuid == uuid);
+            if (application == null)
+            {
+                _logger.LogWarning("Application with uuid {uuid} not found", uuid);
+                return NotFound(new { message = "Application not found" });
+            }
+
+            // Retrieve and delete all form fields associated with the application
+            var formResponses = _context.FormResponses.Where(f => f.ApplicationId == application.Uuid).ToList();
+            _context.FormResponses.RemoveRange(formResponses);
+
+            // Delete the application
+            _context.Applications.Remove(application);
+            _context.SaveChanges();
+
+            _logger.LogInformation("Deleted application with uuid {uuid}", uuid);
+
+            return Ok(new { message = "Successfully deleted application and associated form fields" });
+        }
+
+
     }
-
-
 }
