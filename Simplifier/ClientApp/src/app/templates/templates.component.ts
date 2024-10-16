@@ -67,7 +67,7 @@ export class TemplatesComponent {
       return;
     }
     // Add new form field on frontend
-    console.log('submitted form');
+    ('submitted form');
     this.templateItems.length === 0
     const order = this.templateItems.length + 1;
     this.templateItems.push({...this.templateForm.value, order} as TemplateItem);
@@ -75,7 +75,6 @@ export class TemplatesComponent {
 
   selectTemplate(template: Template) {
     this.selectedTemplate = template;
-    console.log(this.selectedTemplate.formFields);
   }
 
   async ngOnInit() {
@@ -94,13 +93,11 @@ export class TemplatesComponent {
       (await this.http
         .get<Template[]>(this.baseUrl + 'api/templates')
         .toPromise()) || [];
-        console.log(this.templates);
   }
 
   // Save entire form on backend.
   saveTemplate() {
     console.log('saving template');
-    console.log(this.templateItems);
     let templateId: string = crypto.randomUUID()
     let template = {
       Uuid: templateId, // Uuid with uppercase
@@ -137,6 +134,26 @@ export class TemplatesComponent {
       this.templateItems = [];
       this.templateForm.reset();
       this.templateName = '';
+  }
+
+
+  deleteTemplate() {
+    if (!this.selectedTemplate) {
+      console.log('No application selected');
+      return;
+    }
+
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    this.http
+      .delete(this.baseUrl + `api/templates/${this.selectedTemplate.uuid}`, { headers })
+      .subscribe(
+        () => {
+          this.templates = this.templates.filter(template => template.uuid !== this.selectedTemplate!.uuid);
+          this.selectedTemplate = undefined;
+          console.log('Application deleted successfully');
+        },
+        (error) => console.error(error)
+      );
   }
 
   // updateTemplate() {

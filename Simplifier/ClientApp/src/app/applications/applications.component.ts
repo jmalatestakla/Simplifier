@@ -87,7 +87,6 @@ export class ApplicationsComponent implements OnInit {
 
   selectApplication(application: Application | undefined) {
     this.selectedApplication = application;
-    console.log(this.templates);
     this.selectedApplicationTemplateName = this.templates.find(template => template.uuid === application?.templateId)?.name || '';
     this.toggleRawText = false;
   }
