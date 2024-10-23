@@ -14,6 +14,6 @@ namespace Simplifier.Entities
         public DateTime UpdatedAt { get; set; }
         public Guid TemplateId { get; set; } // FK
         public virtual Template? Template { get; set; }
-        public ICollection<FormResponses> FormResponses { get; set; }   
+        public ICollection<FormResponses>? FormResponses { get; set; }   
     }
 }

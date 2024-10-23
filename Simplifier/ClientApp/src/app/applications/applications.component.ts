@@ -11,7 +11,7 @@ interface Application {
   createdAt: string;
   updatedAt: string;
   templateId: string; // FK
-  formResponses: FormResponse[];
+  formResponses?: FormResponse[];
 }
 
 interface FormResponse {
@@ -82,6 +82,7 @@ export class ApplicationsComponent implements OnInit {
         (a, b) =>
           new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
       );
+      console.log(this.applications)
     } 
   }
 
@@ -93,7 +94,6 @@ export class ApplicationsComponent implements OnInit {
 
   addNewApplication() {
     if (this.applicationForm.invalid) {
-      console.log('form invalid');
       return;
     }
     this.responses = [
@@ -102,12 +102,6 @@ export class ApplicationsComponent implements OnInit {
         applicationId: crypto.randomUUID(), // Replace with actual logic to generate a unique Application ID
         formField: 'field1',
         response: 'response1',
-      },
-      {
-        uuid: crypto.randomUUID(),
-        applicationId: crypto.randomUUID(), // Replace with actual logic to generate a unique Application ID
-        formField: 'field2',
-        response: 'response2',
       },
     ];
 
@@ -119,7 +113,6 @@ export class ApplicationsComponent implements OnInit {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       templateId: this.applicationForm.value.templateId!, // Replace with actual logic to generate a unique Template ID
-      formResponses: this.responses,
     };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     this.http

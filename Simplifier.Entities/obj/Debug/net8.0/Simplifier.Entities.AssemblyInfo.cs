@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Simplifier.Entities")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2d9cd067b178e0e2b7aed3c8315426914b02ea4b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2837f2ef77cd85f4b963924e75e45d3f10ad9940")]
 [assembly: System.Reflection.AssemblyProductAttribute("Simplifier.Entities")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Simplifier.Entities")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

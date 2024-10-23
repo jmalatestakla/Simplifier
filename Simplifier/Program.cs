@@ -9,6 +9,9 @@ builder.Services.AddDbContext<SimplifierContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // builder.Services.AddDBContext<SimplifierContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddHttpClient();
+
+
 
 var app = builder.Build();
 
